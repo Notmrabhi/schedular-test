@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Base64 Image Viewer</title>
+</head>
+<body>
+    <h2>Paste Base64 String</h2>
+
+    <textarea id="base64Input" 
+              placeholder="Paste Base64 string here..." 
+              style="width: 500px; height: 150px;"></textarea>
+    <br/><br/>
+
+    <button onclick="showImage()">Show Image</button>
+
+    <h3>Output:</h3>
+    <img id="outputImage" style="max-width: 300px; border: 1px solid #ccc;" />
+
+    <script>
+        function showImage() {
+            let base64 = document.getElementById("base64Input").value.trim();
+
+            // If user pasted full string like "data:image/jpeg;base64,XXXX"
+            // it will work automatically; no need to modify.
+
+            // If they pasted only the pure Base64 without prefix:
+            if (!base64.startsWith("data:image")) {
+                base64 = "data:image/jpeg;base64," + base64;
+            }
+
+            document.getElementById("outputImage").src = base64;
+        }
+    </script>
+</body>
+</html>
